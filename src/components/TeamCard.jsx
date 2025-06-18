@@ -16,8 +16,8 @@ const TeamCard = ({ name, image, social, id }) => {
               <h2>About Me & Project</h2>
               <p>
                 {" "}
-                Myself Ashish Singh , student of Computer Science & Engineering
-                Panjab University SSGRC Hoshiarpur. <br />
+                Myself Vaibhav kumar , student of Information Technology
+                Panjab University Chandigarh. <br />
                 Currently studying in 3rd year. <br />I have developed this
                 project to understand the complex algorithms of our syllabus in
                 a easy way.{" "}
@@ -25,7 +25,7 @@ const TeamCard = ({ name, image, social, id }) => {
             </div>
             <div className="front front-1">
               <div className="image">
-                <img src={image} alt="ashish singh" />
+                <img src={image} alt="Vaibhav kumar" />
                 <h2>{name}</h2>
               </div>
             </div>
@@ -35,15 +35,15 @@ const TeamCard = ({ name, image, social, id }) => {
             <div className="back">
               <h2>About Me & Project</h2>
               <p>
-                Hey Everyone ! This is Kavya Gupta, a third-year BE CSE student
-                at Panjab University SSG Regional Center. Purpose of developing
+                Hey Everyone ! This is Gaurav Prakash, a third-year BE CSE student
+                at Panjab University. Purpose of developing
                 this project is to sharp my Full Stack Skills and help our
                 juniors to understand easily the world of Algorithms.
               </p>
             </div>
             <div className="front front-2">
               <div className="image">
-                <img src={image} alt="Kavya Gupta" />
+                <img src={image} alt="Gaurav Prakash" />
                 <h2>{name}</h2>
               </div>
             </div>
@@ -71,16 +71,16 @@ const TeamCard = ({ name, image, social, id }) => {
 
                   <div className="social-link">
                     <a
-                      href="https://www.linkedin.com/in/ashish3553/"
+                      href="https://www.linkedin.com/in/vaibhav-kumar-3a1b62257/"
                       target="_blank"
                     >
                       <FaLinkedin />
                     </a>
-                    <a href="https://github.com/AS21317" target="_blank">
+                    <a href="https://github.com/vaibhav-prjapati" target="_blank">
                       {" "}
                       <FaGithub />
                     </a>
-                    <a href="mailto:ashish3553singh@gmail.com" target="_blank">
+                    <a href="mailto:vaibhavop569@gmail.com" target="_blank">
                       {" "}
                       <MdEmail />
                     </a>
@@ -108,16 +108,16 @@ const TeamCard = ({ name, image, social, id }) => {
 
                   <div className="social-link">
                     <a
-                      href="https://www.linkedin.com/in/kavya2719/"
+                      href="https://www.linkedin.com/in/gaurav-prakashh/"
                       target="_blank"
                     >
                       <FaLinkedin />
                     </a>
-                    <a href="https://github.com/kavya2719" target="_blank">
+                    <a href="https://github.com/iamgaurav12" target="_blank">
                       {" "}
                       <FaGithub />
                     </a>
-                    <a href="mailto:kavyagupta2719@gmail.com" target="_blank">
+                    <a href="mailto:prakashgaurav189@gmail.com" target="_blank">
                       {" "}
                       <MdEmail />
                     </a>

@@ -1,8 +1,8 @@
 import { Nav, TeamCard } from '../components'
 import '../styles/About.css'
 
-import ashishImg from '../assets/teamImage/ashishImg.png'
-import kavyaImg from '../assets/teamImage/kavyaImg.png'
+import ashishImg from '../assets/teamImage/vaibhavImage.png'
+import kavyaImg from '../assets/teamImage/gauravImage.jpg'
 import socialImg from '../assets/teamImage/Social.png'
 import InstructorCard from '../components/InstructorCard'
 import Footer from '../components/Footer'

@@ -1,207 +1,151 @@
-
-
-
-
-
-.maincontainer
-{
+/* Main container for flip cards */
+.maincontainer {
     width: 302px;
     height: 299px;
-    z-index: 1000;
     margin: 10px;
     float: left; /* stack each div horizontally */
+    position: relative; /* Added for proper positioning context */
 }
 
-img
-{
-   border-radius: 10px;
+img {
+    border-radius: 10px;
+    max-width: 100%; /* Prevent images from overflowing */
+    height: auto;
 }
 
-.back h2
-{
+.back h2 {
     font-weight: 700;
     font-size: 1.4rem;
     position: absolute;
+    margin: 0; /* Remove default margin */
+    padding: 10px;
 }
 
-.back p
-{
+.back p {
     position: absolute;
-    padding: .51rem .6rem;
-    top: 40px;
+    padding: 0.51rem 0.6rem;
+    top: 50px; /* Adjusted to avoid overlap with h2 */
     text-align: justify;
     font-size: 18px;
+    margin: 0; /* Remove default margin */
 }
 
-
-.front-1 h2
-{
+.front-1 h2,
+.front-2 h2 {
     position: absolute;
     font-size: larger;
     font-weight: 700;
     padding: 10px;
-    top: 260px;
-    left:80px;
+    bottom: 20px; /* Changed from top to bottom for better positioning */
+    left: 80px;
     color: #d1f90a;
+    margin: 0; /* Remove default margin */
 }
 
-.front-2 h2
-{
-    position: absolute;
-    font-size: larger;
-    font-weight: 700;
-    padding: 10px;
-    top: 260px;
-    left:80px;
-    color: #d1f90a;
-}
-
-/* style the maincontainer class with all child div's of class .front */
-.maincontainer-1 > .front
-{
+/* Card 1 flip animation */
+.maincontainer-1 > .front {
     position: absolute;
     transform: perspective(600px) rotateY(0deg);
-    
     width: 302px;
     height: 290px;
-    
-    backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
-    transition: transform .5s linear 0s;
-}
-.maincontainer-1:hover > .front
-{
-    transform: perspective(600px) rotateY(-180deg);
-    -webkit-transform: perspective(600px) rotateY(-180deg);
-    -moz-transform: perspective(600px) rotateY(-180deg);
-    -ms-transform: perspective(600px) rotateY(-180deg);
-    -o-transform: perspective(600px) rotateY(-180deg);
-}
-
-/* style the maincontainer class with all child div's of class .back */
-.maincontainer-1 > .back
-{
-    position: absolute;
-    transform: perspective(600px) rotateY(180deg);
-    background: #262626;
-    color: #fff;
-    width: 302px;
-    height: 290px;
-    border-radius: 10px;
-    padding: 5px;
-    backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
-    transition: transform .5s linear 0s;
-}
-.maincontainer-1:hover > .back
-{
-    transform: perspective(600px) rotateY(0deg);
-}
-
-
-
-/*      For card  2 */
-
-.maincontainer-2 > .front
-{
-    position: absolute;
-    transform: perspective(600px) rotateY(0deg);
-    
-    width: 302px;
-    height: 290px;
-    
-    backface-visibility: hidden; /* cant see the backside elements as theyre turning around */
-    transition: transform .5s linear 0s;
-}
-.maincontainer-2:hover > .front
-{
-    transform: perspective(600px) rotateY(180deg);
-    -webkit-transform: perspective(600px) rotateY(180deg);
-    -moz-transform: perspective(600px) rotateY(180deg);
-    -ms-transform: perspective(600px) rotateY(180deg);
-    -o-transform: perspective(600px) rotateY(180deg);
-}
-
-/* style the maincontainer class with all child div's of class .back */
-.maincontainer-2 > .back
-{
-    position: absolute;
-    transform: perspective(600px) rotateY(-180deg);
-    background: #262626;
-    color: #fff;
-    width: 302px;
-    height: 290px;
-    border-radius: 10px;
-    padding: 5px;
     backface-visibility: hidden;
-    /*cantseethebacksideelementsastheyreturningaround*/transition: transform .5s linear 0s;
-    -webkit-transform: perspective(600px) rotateY(-180deg);
-    -moz-transform: perspective(600px) rotateY(-180deg);
-    -ms-transform: perspective(600px) rotateY(-180deg);
-    -o-transform: perspective(600px) rotateY(-180deg);
+    transition: transform 0.5s linear 0s;
 }
-.maincontainer-2:hover > .back
-{
+
+.maincontainer-1:hover > .front {
+    transform: perspective(600px) rotateY(-180deg);
+}
+
+.maincontainer-1 > .back {
+    position: absolute;
+    transform: perspective(600px) rotateY(180deg);
+    background: #262626;
+    color: #fff;
+    width: 302px;
+    height: 290px;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box; /* Include padding in width/height calculation */
+    backface-visibility: hidden;
+    transition: transform 0.5s linear 0s;
+}
+
+.maincontainer-1:hover > .back {
     transform: perspective(600px) rotateY(0deg);
 }
 
+/* Card 2 flip animation */
+.maincontainer-2 > .front {
+    position: absolute;
+    transform: perspective(600px) rotateY(0deg);
+    width: 302px;
+    height: 290px;
+    backface-visibility: hidden;
+    transition: transform 0.5s linear 0s;
+}
 
+.maincontainer-2:hover > .front {
+    transform: perspective(600px) rotateY(180deg);
+}
 
+.maincontainer-2 > .back {
+    position: absolute;
+    transform: perspective(600px) rotateY(-180deg);
+    background: #262626;
+    color: #fff;
+    width: 302px;
+    height: 290px;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box; /* Include padding in width/height calculation */
+    backface-visibility: hidden;
+    transition: transform 0.5s linear 0s;
+}
 
+.maincontainer-2:hover > .back {
+    transform: perspective(600px) rotateY(0deg);
+}
 
-
-
-
-/*   Social media icons and details css    */
-
-.big-box{
+/* Social media section - Positioned closer to flip cards */
+.big-box {
     display: flex;
     flex-direction: column;
     position: relative;
-    /* padding-top: 100px; */
-    /* margin-top: 100px; */
+    margin-top: 20px; /* Reduced from 50px to bring closer to images */
+    margin-bottom: 30px; /* Further reduced to prevent footer issues */
+    clear: both; /* Clear the float from flip cards */
+    padding-bottom: 20px; /* Reduced padding */
 }
 
 .container-1 {
-   position: absolute;
-   background: transparent;
-   display: flex;
-   gap: 20px;
-   top: -30%;
-   left: 70%;
-   /* z-index: 10000; */
-   justify-content: space-between;
-   transform:rotate(-90deg) ;
-   -webkit-transform:rotate(-90deg) ;
-   -moz-transform:rotate(-90deg) ;
-   -ms-transform:rotate(-90deg) ;
-   -o-transform:rotate(-90deg) ;
-}
-
-
-.container-2 {
-    position: absolute;
+    position: relative;
     background: transparent;
     display: flex;
-    gap: 20px;
-    top: 8%;
-    left: -70%;
-    /*z-index: 10000;
-    */justify-content: space-between;
-    transform:rotate(90deg) ;
-    -webkit-transform:rotate(90deg) ;
-    -moz-transform:rotate(90deg) ;
-    -ms-transform:rotate(90deg) ;
-    -o-transform:rotate(90deg) ;
+    gap: 20px; /* Back to original gap */
+    justify-content: center;
+    margin: 20px 0;
 }
 
+.container-2 {
+    position: relative;
+    background: transparent;
+    display: flex;
+    gap: 20px; /* Back to original gap */
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Social media card styling - Simplified with visible links */
+.container .card {
+    position: relative;
+    margin-bottom: 15px;
+    width: 200px;
+    overflow: visible;
+}
 
 .container .card .face {
     width: 200px;
     height: 200px;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
 }
 
 .container .card .face.face1 {
@@ -211,117 +155,154 @@ img
     justify-content: center;
     align-items: center;
     z-index: 1;
-    transform: translateY(100px);
-    -webkit-transform: translateY(100px);
-    -moz-transform: translateY(100px);
-    -ms-transform: translateY(100px);
-    -o-transform: translateY(100px);
+    border-radius: 10px;
 }
 
-.container .card:hover .face.face1{
+.container .card:hover .face.face1 {
     background: #636262;
-    transform: translateY(0px);
 }
 
-.container .card .face.face1>h1{
-  transition: all 0.3s;
-
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
+.container .card .face.face1 > h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
 }
 
-.container .card:hover .face.face1>h1{
-    transform: translateY(30px);
-    -webkit-transform: translateY(30px);
-    -moz-transform: translateY(30px);
-    -ms-transform: translateY(30px);
-    -o-transform: translateY(30px);
+.bg-face > h1 {
+    color: aqua;
 }
-
-
-
-
-
-
-
-.bg-face>h1{
-    color:aqua ;
-   
-   }
 
 .container .card .face.face2 {
-    position: relative;
-    background: #fff;
-    display: flex;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    box-shadow: 0 20px 20px rgba(0,0,0,0.8);
-    transform: translateY(-100px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    z-index: 2;
 }
 
-.container .card:hover .face.face2{
-    transform: translateY(0);
+.container .card:hover .face.face2 {
+    display: flex;
 }
 
 .container .card .face.face2 .content p {
-    margin: 0;
+    margin: 0 0 10px 0;
     padding: 0;
     text-align: center;
     color: #414141;
+    font-size: 14px;
 }
 
 .container .card .face.face2 .content h3 {
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     padding: 0;
-    color: #fff;
-    font-size: 24px;
+    font-size: 18px;
     text-align: center;
     color: #414141;
-} 
+    font-weight: bold;
+}
 
 .container a {
-   text-decoration: none;
-   color: #414141;
-  
+    text-decoration: none;
+    color: #414141;
 }
 
-
-.c1{
-    transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-}
-.c2{
-    transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
+.container .card .face.face2 a {
+    color: #007bff;
+    text-decoration: underline;
+    font-weight: 500;
 }
 
-.social-link{
+.container .card .face.face2 a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+/* Remove problematic rotation classes */
+.c1, .c2 {
+    /* Removed transform rotations that were causing overlap */
+}
+
+.social-link {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     gap: 1.2rem;
-    
     font-size: 2rem;
 }
 
-.social-link>a{
+.social-link > a {
     color: rgb(22, 70, 5);
 }
 
-.content>h3>a{
+.content > h3 > a {
     font-weight: 700;
 }
 
+/* Additional utility classes for better layout */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
- 
+/* Footer positioning - stick to bottom */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+    clear: both;
+    z-index: 10;
+}
+
+/* Page wrapper to ensure proper footer positioning */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* Footer spacing utility - ensures content doesn't overlap */
+.footer-spacing {
+    margin-top: 40px;
+    clear: both;
+    padding-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .maincontainer {
+        float: none;
+        margin: 10px auto;
+    }
+    
+    .container-1,
+    .container-2 {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .big-box {
+        margin-top: 15px; /* Even closer on mobile */
+        margin-bottom: 25px; /* Reduced to prevent footer issues on mobile */
+    }
+    
+    .footer-spacing {
+        margin-top: 30px; /* Reduced spacing on mobile */
+    }
+}

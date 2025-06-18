@@ -1,11 +1,14 @@
-import { SignUp } from '../components'
+import { Nav, Simulator } from '../components'
 
-const SignUpPage = () => {
+const SimulatorPage = () => {
   return (
-    <div className="flex items-center justify-center h-screen w-full">
-      <SignUp />
+    <div className='home_page'>
+      <div>
+        <Nav />
+      </div>
+      <Simulator />
     </div>
   )
 }
 
-export default SignUpPage
+export default SimulatorPage
