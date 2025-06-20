@@ -1,48 +1,258 @@
-.our-team-container{
-    width: 80%;
-    margin: 0 auto;
-    
- 
-}
-
-.about-us-page{
-    height: 100%;
+/* Main page structure - ensures proper layout flow */
+.about-us-page {
+    min-height: 100vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Navigation bar - static positioning, no fixed scroll effects */
+.navbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.8),rgba(4,9,30,0.8)),url('../assets/bg1.jpeg');
+    background-position: center;
+    background-size: cover;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.nav-logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    text-transform: uppercase;
+}
+
+.nav-logo:hover {
+    color: #d1f90a;
+    text-shadow: 0 0 20px rgba(209, 249, 10, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Navigation menu - all buttons on the right */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-menu li {
+    margin: 0;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-menu a:hover::before {
+    left: 100%;
+}
+
+.nav-menu a:hover {
+    color: #d1f90a;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(209, 249, 10, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 10px rgba(209, 249, 10, 0.7);
+}
+
+.nav-menu a.active {
+    color: #d1f90a;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(209, 249, 10, 0.5);
+    text-shadow: 0 0 10px rgba(209, 249, 10, 0.7);
+}
+
+/* Special styling for CTA button */
+.nav-menu .cta-button {
+    background: linear-gradient(135deg, #d1f90a, #a8c906);
+    color: #000;
+    font-weight: 600;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu .cta-button:hover {
+    background: linear-gradient(135deg, #e5ff2e, #d1f90a);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(209, 249, 10, 0.4);
+    color: #000;
+}
+
+/* Mobile menu toggle - hidden by default since responsiveness removed */
+.nav-toggle {
+    display: none;
+}
+
+/* Title section - no margin-top needed since navbar is not fixed */
 .title-section {
-    height: 10vh;
+    height: 15vh;
+    min-height: 120px;
     background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('../assets/bg1.jpeg');
     background-position: center;
     background-size: cover;
     color: #fff;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
-.title{
+
+.title {
     text-align: center;
+    padding: 20px;
 }
-.our-team-container{
-    height: 70vh;
- 
-    margin-top: 2rem;
-    text-align: center;
-}
-.about-us-page h1{
+
+.about-us-page h1 {
     font-size: 36px;
     font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
+
+/* Main content container - takes remaining space */
+.our-team-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+/* Team container - proper flex layout */
 .team {
-    margin-top: -20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
- 
-   
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 0 1rem;
 }
 
+/* Individual team member cards - prevent floating issues */
+.maincontainer {
+    position: relative;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+}
 
+/* Instructor container - remove problematic padding */
+.out-instructor-container {
+    width: 100%;
+}
 
-.out-instructor-container{
-    /* padding-bottom: 400px; */
-    
+/* Footer - sticky at bottom */
+.footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: auto;
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+
+/* Clear floats utility */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Add clearfix to containers that might have floated children */
+.our-team-container::after,
+.team::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Additional fixes for common layout issues */
+
+/* Ensure images don't break layout */
+.maincontainer img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Fix any absolute positioning issues in flip cards */
+.maincontainer .front,
+.maincontainer .back {
+    top: 0;
+    left: 0;
+}
+
+/* Prevent content overflow */
+.about-us-page {
+    overflow-x: hidden;
+}
+
+/* Ensure proper box sizing */
+* {
+    box-sizing: border-box;
+}
+
+/* Body - no special padding needed */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Remove smooth scrolling since we don't want scroll effects */
+html {
+    scroll-behavior: auto;
 }
