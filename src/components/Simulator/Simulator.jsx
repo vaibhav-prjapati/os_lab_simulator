@@ -57,27 +57,72 @@ const Simulator = () => {
   const [RTS, setRTS] = useState(null)
   const [priorityType, setPriorityType] = useState('higher')
   
-  const columnsBeforeRunning = useMemo(() => {
-    const columns = [
-      { Header: 'Process ID (Pid)', accessor: 'Pid' },
-      { Header: 'Arrival Time (AT)', accessor: 'AT'},
-      { Header: 'Burst Time (BT)', accessor: 'BT' },
-    ]
-    if(algo === 'Priority') columns.push({ Header: 'Priority (P)', accessor: 'P' })
-    return columns 
-  }, [algo])
+ const columnsBeforeRunning = useMemo(() => {
+  const columns = [
+    { 
+      id: 'Pid',
+      Header: 'Process ID (Pid)', 
+      accessor: 'Pid' 
+    },
+    { 
+      id: 'AT',
+      Header: 'Arrival Time (AT)', 
+      accessor: 'AT'
+    },
+    { 
+      id: 'BT',
+      Header: 'Burst Time (BT)', 
+      accessor: 'BT' 
+    }
+  ]
+  if(algo === 'Priority') columns.push({ 
+    id: 'P',
+    Header: 'Priority (P)', 
+    accessor: 'P' 
+  })
+  return columns 
+}, [algo])
   const columnsWhileRunning = useMemo(() => {
-    const columns = [
-      { Header: 'Process ID (Pid)', accessor: 'Pid' },
-      { Header: 'Arrival Time (AT)', accessor: 'AT'},
-      { Header: 'Burst Time (BT)', accessor: 'BT' },
-      { Header: 'Completion Time (CT)', accessor: 'CT'},
-      { Header: 'Turnaround Time (TAT)', accessor: 'TAT'},
-      { Header: 'Waiting Time (WT)', accessor: 'WT' },
-    ]
-    if(algo === 'Priority') columns.splice(3, 0, { Header: 'Priority (P)', accessor: 'P' })
-    return columns
-  }, [algo])
+  const columns = [
+    { 
+      id: 'Pid',
+      Header: 'Process ID (Pid)', 
+      accessor: 'Pid' 
+    },
+    { 
+      id: 'AT',
+      Header: 'Arrival Time (AT)', 
+      accessor: 'AT'
+    },
+    { 
+      id: 'BT',
+      Header: 'Burst Time (BT)', 
+      accessor: 'BT' 
+    },
+    { 
+      id: 'CT',
+      Header: 'Completion Time (CT)', 
+      accessor: 'CT'
+    },
+    { 
+      id: 'TAT',
+      Header: 'Turnaround Time (TAT)', 
+      accessor: 'TAT'
+    },
+    { 
+      id: 'WT',
+      Header: 'Waiting Time (WT)', 
+      accessor: 'WT' 
+    }
+  ]
+  if(algo === 'Priority') columns.splice(3, 0, { 
+    id: 'P',
+    Header: 'Priority (P)', 
+    accessor: 'P' 
+  })
+  return columns
+}, [algo])
+
   const keyBindingsData = useMemo(() => [{
     key: '<',
     functionality: 'Prev',

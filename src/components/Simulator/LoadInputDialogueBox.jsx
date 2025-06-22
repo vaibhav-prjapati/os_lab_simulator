@@ -9,11 +9,29 @@ const API_URL = import.meta.env.VITE_OS_LAB_SIMULATOR_API_URL;
 
 const LoadInputsDialogueBox = ({ isVisible=false, handleClick, userName, title: curTitle, description: curDescription, data: curData, index, refreshList, setData: setCurData, handleParentClick, setNoOfProcesses }) => {
   const columns = useMemo(() => [
-    { Header: 'Process ID (Pid)', accessor: 'Pid' },
-    { Header: 'Arrival Time (AT)', accessor: 'AT'},
-    { Header: 'Burst Time (BT)', accessor: 'BT' },
-    { Header: 'Priority (P)', accessor: 'P' },
+    { 
+      id: 'Pid',
+      Header: 'Process ID (Pid)', 
+      accessor: 'Pid' 
+    },
+    { 
+      id: 'AT',
+      Header: 'Arrival Time (AT)', 
+      accessor: 'AT'
+    },
+    { 
+      id: 'BT',
+      Header: 'Burst Time (BT)', 
+      accessor: 'BT' 
+    },
+    { 
+      id: 'P',
+      Header: 'Priority (P)', 
+      accessor: 'P' 
+    },
   ], [])
+
+  // ... rest of the component remains the same ...
 
   const [title, setTitle] = useState(curTitle);
   const [description, setDescription] = useState(curDescription);
