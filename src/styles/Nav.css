@@ -1,41 +1,147 @@
+/* Navigation Bar */
 .navbar {
     position: sticky;
     top: 0;
-    color: white;
-    /* background-color: aqua; */
+    z-index: 1000;
+    background: rgba(26, 32, 44, 0.95); /* Dark background to match your design */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-between;
-    padding: 2% 4%;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
+/* Logo/Brand */
 .oslab {
-    font-size: 25px;
-    font-weight: 500;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    transition: color 0.3s ease;
 }
 
-ul {
-    font-size: 18px;
+.oslab a {
+    color: #ffffff; /* White text for dark background */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.oslab a:hover {
+    color: #63b3ed; /* Light blue on hover */
+}
+
+/* Navigation Links Container */
+.links {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 1.5rem; /* This replaces your gap-6 class */
 }
 
 .links li {
-    list-style: none;
-    display: inline-block;
-    padding: 5px 15px;
+    margin: 0;
+}
+
+/* Regular Navigation Links */
+.links li a:not(.after\:hidden) {
     position: relative;
-}
-
-.navbar ul li a::after {
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #f44336;
     display: block;
-    transition: 0.5s;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #cbd5e0; /* Light gray text for dark background */
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
-.navbar ul li a:hover::after {
-    width: 100%;
+/* Link Hover Effects (excluding sign-in button) */
+.links li a:not(.after\:hidden):hover {
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Underline Animation (excluding sign-in button) */
+.links li a:not(.after\:hidden)::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #63b3ed, #4299e1);
+    transform: translateX(-50%);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.links li a:not(.after\:hidden):hover::before {
+    width: 80%;
+}
+
+/* Active Link State (excluding sign-in button) */
+.links li a:not(.after\:hidden).active {
+    color: #63b3ed;
+    background: rgba(99, 179, 237, 0.1);
+}
+
+.links li a:not(.after\:hidden).active::before {
+    width: 80%;
+    background: #63b3ed;
+}
+
+/* Focus States for Accessibility */
+.links li a:focus {
+    outline: 2px solid #63b3ed;
+    outline-offset: 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .oslab {
+        font-size: 1.25rem;
+    }
+    
+    .links {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+    
+    .links li {
+        margin: 0 0.25rem;
+    }
+    
+    .links li a:not(.after\:hidden) {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .links {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .links li {
+        margin: 0;
+    }
+}
+
+/* Smooth Scrolling for Navigation */
+html {
+    scroll-behavior: smooth;
 }
