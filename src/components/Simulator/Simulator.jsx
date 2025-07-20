@@ -16,6 +16,7 @@ import { Toaster, toast as toastifyToast } from "react-hot-toast"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ImportJsonDialogueBox from "./ImportJsonDialogueBox"
+import "./Simulator.css"
 
 
 const Simulator = () => {
@@ -455,18 +456,6 @@ const Simulator = () => {
     };
   }, [isRunning, currentStepIndex, ganttChartData, data, tempNoOfProcesses, algo, timeQuantum, priorityType]);
 
-  /* Writing down a bug here that can arise in future. */ 
-  /*  
-    The useEffect for binding keys adds an eventListener caches up the whole function even cache the variable values
-    
-    Problem that can arise: when you keyPress, it will call the function with the cached values and those values are may not be the actual updated value, in case you updated it meanwhile without refershing the useEffect.
-
-    Solution: add the state in the useEffect dependency array due to which you are encountering that bug. It will result in refreshing the keybindings caches whenever the dependencies get updated, resulting in caching the updated values and preventing the bug from happening again. 
-
-    I can do the same right now, adding all the dependencies here in the useEffect, but its not necessary now and may also be very ineffiecient so not doing that for now.
-  */
-
-  /* useEffect for showing info of keybindings via toaster */
   useEffect(() => {
     if(isRunning){
       toast.info(
@@ -603,76 +592,73 @@ const Simulator = () => {
 
   
   return (
-    <div className="text-white text-center">
-      <h1 className="text-4xl">CPU Scheduling Simulator</h1>
+    <div className="simulator-container">
+      <h1 className="main-title">CPU Scheduling Simulator</h1>
 
       {/* AlgoSelect Section */}
-      <div className="mt-3 flex flex-row justify-center gap-5">
-        <h1 className="text-2xl">Algo: </h1>
-
-        <div ref={algoOptionsRef} className="flex flex-col border border-r-0 border-t-0 transition-all ease-in-out duration-1000 max-h-[32px] max-w-[125px] overflow-hidden">
+      <div className="algo-section">
+        <h1 className="algo-title">Algo: </h1>
+        <div ref={algoOptionsRef} className="algo-dropdown" style={{maxHeight: isAlgoOpen ? '180px' : '32px', maxWidth: isAlgoOpen ? '250px' : '125px'}}>
           {
             isAlgoOpen?
               AlgorithmsData.map(({name, value}, index) => {
                 return (
-                  <button key={index} className="text-xl pl-2 pr-3 py-1 text-left" value={value} onClick={handleChangeAlgo}>
+                  <button key={index} className="algo-option" value={value} onClick={handleChangeAlgo}>
                     • {name}
                   </button>
                 )
               })
             :
-              <button ref={algoRef} className="relative flex text-2xl px-2 items-center w-[550px] h-[180px] group overflow-hidden" onClick={handleChangeAlgoClick}>
+              <button ref={algoRef} className="algo-current" onClick={handleChangeAlgoClick}>
                 {algo}
 
                 {/* down arrow sign */}
-                <div className="absolute left-[108px] border-dashed border-4 border-r-transparent border-l-transparent border-b-0 w-0 h-0" />  
+                <div className="algo-arrow" />  
                </button>
           }
         </div>
       </div>
 
-      {isRunning && <Element name="explanationMsgSection" id="explanationMsgSection" className="mt-10 mx-10 flex flex-row text-2xl gap-24 items-center">
+      {isRunning && <Element name="explanationMsgSection" id="explanationMsgSection" className="explanation-section">
         {/* Current Time */}
-        <div className="flex flex-row py-3 px-5 gap-4">
-          <div className="flex flex-col group">
+        <div className="current-time">
+          <div className="time-label">
             <span> Current Time: </span>
-            <div className={`h-[2px] bg-white transition-all duration-1000 ease-in-out ${animateTime && 'animate-line'}`} />
+            <div className={`time-underline${animateTime ? ' animate' : ''}`} />
           </div>
           <span> {currentTime} </span>
         </div>
         
         {/* Explanation Section */}
-        <div className="flex justify-center items-center w-[800px] overflow-hidden text-xl tracking-widest">
-          <div className={`px-6 py-6 transition-opacity duration-500 ease-in-out ${animateMessage? 'opacity-0 border-0': 'opacity-100 border'}`}>         
+        <div className="explanation-message">
+          <div className={`message-content${animateMessage ? ' hidden' : ' visible'}`}>
             {explanationMessage.map((msg, index) => <p key={index}> {msg} </p>)}
           </div>
         </div>
         
         {/* Time Before Switch */}
-        {algo === 'RR' && <div className="flex flex-row gap-4">
-          <div className="flex flex-col group">
+        {algo === 'RR' && <div className="time-before-switch">
+          <div className="time-label">
             <span> Time Before Switch: </span>
-            <div className={`h-[2px] bg-white transition-all duration-1000 ease-in-out ${animateTime && 'animate-line'}`} />
+            <div className={`time-underline${animateTime ? ' animate' : ''}`} />
           </div>
           <span> {RTS} </span>
         </div>}
         
         {/* Priority Mssg Section */}
-        {algo === 'Priority' && <p className="text-lg w-[200px] h-fit border p-3">
+        {algo === 'Priority' && <p className="priority-message">
           Higher the value, <span className="capitalize"> {priorityType} </span> the priority.
         </p>}
       </Element>}
 
-      <div className="w-full flex flex-row pl-5 py-10 gap-16">
+      <div className="main-content">
         {isRunning?
-          <div className="flex flex-col gap-10">
+          <div className="simulation-sidebar">
             {/* CPU Section */}
-            <div className={`w-[200px] ${cpu.Pid? 'h-[120px]': 'h-[75px]'} border flex flex-col px-5 ${isCPUFree? 'max-h-[70px]': 'max-h-[120px]'} transition-all duration-1000 ease-in-out`}>
-              <h2 className="text-2xl border-b-2 py-2">CPU</h2>
-
+            <div className={`cpu-section${cpu.Pid ? ' with-process' : ' without-process'}${isCPUFree ? ' free' : ' busy'}`}>
+              <h2 className="cpu-title">CPU</h2>
               {
-                cpu.Pid && <div className={`flex flex-row items-center justify-evenly h-full text-xl
-                transition-opacity duration-1000 ease-in-out ${isCPUFree? 'opacity-0': 'opacity-100'}`}>
+                cpu.Pid && <div className={`cpu-content${isCPUFree? ' hidden': ' visible'}`}>
                   <span> {cpu.Pid} </span>
                   <span> : </span>
                   <span> {cpu.RT} </span>
@@ -681,13 +667,13 @@ const Simulator = () => {
             </div>
 
             {/* Queue Section */}
-            <div className={`h-fit border flex flex-col px-3 max-h-[${isQueueEmpty? '70px': '500px'}] transition-all duration-1000 ease-in-out`}>
-              <h2 className="text-2xl border-b-2 py-2 uppercase tracking-wide">Queue</h2>
-              <div className="flex flex-col py-3 gap-3 text-xl">
+            <div className={`queue-section${isQueueEmpty ? ' empty' : ' filled'}`}>
+              <h2 className="queue-title">Queue</h2>
+              <div className="queue-content">
                 {
                   queue.map(({ Pid, AT, BT, P }, index) => {
                     return (
-                      <div key={index} className={`flex flex-row items-center justify-evenly text-xl transition-opacity duration-1000 ease-in-out ${isQueueEmpty? 'opacity-0': 'opacity-100'}`}>
+                      <div key={index} className={`queue-item${isQueueEmpty? ' hidden': ' visible'}`}>
                         <span> {Pid} </span>:
                         {algo !=='RR' && <>
                           <span> {AT} </span>,
@@ -704,16 +690,16 @@ const Simulator = () => {
             </div>
           </div>
         : /* Simulator Sidebar Before Running */ 
-        <div className="flex flex-col gap-10">
+        <div className="config-sidebar">
           {/* Section-1 */}
-          <div className="flex flex-col gap-5 border p-5 justify-center items-center text-2xl">
+          <div className="config-section">
             {/* Total No of Processes */}
-            <div className="relative group overflow-hidden">
-              <div className="flex flex-row items-center gap-3">
+            <div className="process-count">
+              <div className="process-count-content">
                 Total No. of Processes: 
                 {!isEditingNoOfProcesses? <>
                   &nbsp;{noOfProcesses} 
-                  <button onClick={() => setIsEditingNoOfProcesses(true)}>
+                  <button className="edit-button" onClick={() => setIsEditingNoOfProcesses(true)}>
                     <TbEdit />
                   </button>
                 </>
@@ -726,16 +712,14 @@ const Simulator = () => {
                     placeholder={noOfProcesses}
                     value={tempNoOfProcesses}
                     onChange={(e) => setTempNoOfProcesses(e.target.value)}
-                    className="w-[60px] text-center bg-transparent border-b-2 focus:outline-none"
+                    className="process-input"
                   />
-                  <button className="text-lg rounded-full border-2 p-[6px]" onClick={handleEditNoOfProcesses}>
+                  <button className="edit-button" onClick={handleEditNoOfProcesses}>
                     <MdOutlineDoneOutline />
                   </button>
                 </>}
               </div>
-
-              {/* Shiny div */}
-              <div className={`absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 ${animateShine? 'animate-shine': ''}`} />
+              <div className={`shine-effect${animateShine ? ' animate' : ''}`} />
             </div>
             
             {/* Context Switch Time */}
@@ -753,7 +737,7 @@ const Simulator = () => {
             </div> */}
             
             {/* Time Quantum */}
-            {algo === 'RR' && <div className="flex flex-row items-center">
+            {algo === 'RR' && <div className="time-quantum">
               Time Quantum:
               <input 
                 type="number" 
@@ -761,41 +745,40 @@ const Simulator = () => {
                 min={0}
                 value={timeQuantum} 
                 onChange={(e) => setTimeQuantum(e.target.value)} 
-                className="ml-2 px-2 w-[80px] text-center bg-transparent border-b-2 focus:outline-none"
               />
             </div>}
 
             {/* Priority Type */}
-            {algo === 'Priority' && <div>
+            {algo === 'Priority' && <div className="priority-config">
               <p><label htmlFor="priorityType"> Higher the value, </label></p>
-              <select name="priorityType" id="priorityType" className="text-xl bg-transparent border my-2 px-2" value={priorityType} onChange={(e) => setPriorityType(e.target.value)}>
-                <option value="higher" className="text-lg bg-white text-black"> Higher </option>
-                <option value="lower" className="text-lg bg-white text-black"> Lower </option>
+              <select name="priorityType" id="priorityType" className="priority-select" value={priorityType} onChange={(e) => setPriorityType(e.target.value)}>
+                <option value="higher" className="priority-option"> Higher </option>
+                <option value="lower" className="priority-option"> Lower </option>
               </select>
               <p><label htmlFor="priorityType"> the priority </label></p>
             </div>}
             
             <ShinyButton 
-              className="text-left border-b-2 w-fit"
+              className="shiny-button"
               text="Fill Sample Data"
               onClick={handleFillSampleData}
             />
             <ShinyButton 
-              className="text-left border-b-2 w-fit"
+              className="shiny-button"
               text="Fill Random Data"
               onClick={handleFillRandomData}
             />
             <ShinyButton 
-              className="text-left border-b-2 w-fit"
+              className="shiny-button"
               text="Add Process"
               onClick={handleAddProcess}
             />
           </div>
           
           {/* Section-2 */}
-          <div className="flex flex-col gap-5 border p-5 justify-center items-center text-2xl">
+          <div className="button-section">
             <ShinyButton 
-              className="text-left w-fit"
+              className="shiny-button"
               text={
                 <span className="flex flex-row items-center gap-3">
                   <FaRegSave />
@@ -805,7 +788,7 @@ const Simulator = () => {
               onClick={handleSave}
             />
             <ShinyButton 
-              className="text-left w-fit"
+              className="shiny-button"
               text={
                 <span className="flex flex-row items-center gap-3">
                   <MdBookmarks />
@@ -817,7 +800,7 @@ const Simulator = () => {
           </div>
         </div>}
 
-        <div className="flex flex-col items-center flex-grow-[1] gap-10">
+        <div className="table-container">
           {/* Table */}
           <Table 
             data={data} 
@@ -829,86 +812,76 @@ const Simulator = () => {
           />
           
           {isRunning ? <>
-            {/* Simulation Buttons Section While Running */}
-            <div className="flex flex-row justify-between w-[800px]">
-              <div className="flex flex-row gap-5">
+            <div className="simulation-controls">
+              <div className="control-group">
                 <ShinyButton 
-                  className="text-xl border px-3 py-2"
+                  className="control-button"
                   text="Edit"
                   onClick={handleEdit}
                 />
                 <ShinyButton 
-                  className="text-xl border px-3 py-2"
+                  className="control-button"
                   text="Reset"
                   onClick={handleReset}
                 />
               </div>
-
-              <div className="flex flex-row gap-5">
+              <div className="control-group">
                 <ShinyButton 
-                  className={`text-xl border px-3 py-2 ${currentStepIndex === steps.length-1? 'opacity-50': ''}`}
+                  className={`control-button${currentStepIndex === steps.length-1? ' disabled': ''}`}
                   text="Show Final Result"
                   onClick={handleShowFinalResult}
                 />
                 <ShinyButton 
-                  className={`text-xl border px-3 py-2 ${currentStepIndex === -1? 'opacity-50': ''}`}
+                  className={`control-button${currentStepIndex === -1? ' disabled': ''}`}
                   text="Restart"
                   onClick={handleRestart}
                 />
               </div>
-
-              <div className="flex flex-row gap-5">
+              <div className="control-group">
                 <ShinyButton 
-                  className={`text-xl border px-3 py-2 ${currentStepIndex === -1? 'opacity-50': ''}`}
+                  className={`control-button${currentStepIndex === -1? ' disabled': ''}`}
                   text="Prev"
                   onClick={handlePrev}
                 />
                 <ShinyButton 
-                  className={`text-xl border px-3 py-2 ${currentStepIndex === steps.length-1? 'opacity-50': ''}`}
+                  className={`control-button${currentStepIndex === steps.length-1? ' disabled': ''}`}
                   text="Next"
                   onClick={handleNext}
                 />
               </div>
             </div>
-            
-            <div className="flex flex-col gap-5 w-[800px] items-start text-xl">
-              {/* Avg TAT section */}
-              {Boolean(avgTAT) && <div className={`transition-opacity ease-in-out duration-1000 ${animateAvgTAT? 'opacity-0': 'opacity-100'}`}>
-                <span className="border-b-2">Average Turn Around Time:</span>
+            <div className="results-section">
+              {Boolean(avgTAT) && <div className={`result-item${animateAvgTAT? ' hidden': ' visible'}`}>
+                <span className="result-label">Average Turn Around Time:</span>
                 <span> &nbsp;{avgTAT} </span>
               </div>}
-
-              {/* Avg WT section */}
-              {Boolean(avgWT) && <div className={`transition-opacity ease-in-out duration-1000 ${animateAvgWT? 'opacity-0': 'opacity-100'}`}>
-                <span className="border-b-2">Average Waiting Time:</span>
+              {Boolean(avgWT) && <div className={`result-item${animateAvgWT? ' hidden': ' visible'}`}>
+                <span className="result-label">Average Waiting Time:</span>
                 <span> &nbsp;{avgWT} </span>
               </div>}
             </div>
           </>
-          :  /* Simulator Buttons Section Before Running */
-          <div className="flex flex-row w-full justify-between mt-5 pr-10">
-            <div className="flex flex-row gap-5">
+          :  <div className="before-running-controls">
+            <div className="control-group">
               <ShinyButton 
-                className="text-xl border px-3 py-2"
+                className="control-button"
                 text="Copy"
                 onClick={handleCopy}
               />
-
               <ShinyButton 
-                className="text-xl border px-3 py-2"
+                className="control-button"
                 text="Import JSON file"
                 onClick={() => setIsVisibleImport(true)}
               />
             </div>
-
-            <div className="flex flex-row gap-5">
+            <div className="control-group">
               <ShinyButton 
-                className="text-xl border px-3 py-2"
+                className="control-button"
                 text="Reset"
                 onClick={handleReset}
               />
               <ShinyButton 
-                className="text-xl border px-3"
+                className="control-button"
                 text="Run"
                 onClick={handleRun}
               />
@@ -917,9 +890,9 @@ const Simulator = () => {
         </div>
         
         {/* Completed Stack Section */}
-        {isRunning && <div className={`mr-5 w-[200px] h-fit border flex flex-col px-3 max-h-[${isStackEmpty? '70px': '500px'}] transition-all duration-1000 ease-in-out`}>
-          <h2 className="text-2xl border-b-2 py-2 uppercase tracking-wide">Completed</h2>
-          <div className={`flex flex-col py-3 gap-3 text-xl transition-opacity duration-1000 ease-in-out ${isStackEmpty? 'opacity-0': 'opacity-100'}`}>
+        {isRunning && <div className={`completed-section${isStackEmpty ? ' empty' : ' filled'}`}>
+          <h2 className="completed-title">Completed</h2>
+          <div className={`completed-content${isStackEmpty? ' hidden': ' visible'}`}>
             {
               stack.map((Pid, index) => <span key={index}> {Pid} </span>)
             }
@@ -927,34 +900,31 @@ const Simulator = () => {
         </div>}
       </div>
 
-      {isRunning && <div className="pb-10">
-          {/* Gantt Chart */}
-          <Element name="ganttChart" id="ganttChart" className="flex flex-col h-fit justify-center">
-            <h2 className="text-2xl border-b-2 uppercase py-2 px-4 mx-auto"> Gantt Chart </h2>
-
-            <div className="flex flex-col py-5 px-10 gap-2">
+      {isRunning && <div className="gantt-section">
+          <Element name="ganttChart" id="ganttChart" className="gantt-container">
+            <h2 className="gantt-title"> Gantt Chart </h2>
+            <div className="gantt-chart">
               {ganttChartData.map((row, rowIndex) => {
                   return (
-                    <div key={rowIndex} className="flex flex-row justify-center">
+                    <div key={rowIndex} className="gantt-row">
                       {row.map((process, colIndex) => {
                         return (
-                          <div key={colIndex} className='text-xl min-w-[60px] flex flex-col text-left transition-all duration-1000 ease-in-out' style={{ flexGrow: process.timeInCPU }}>
+                          <div key={colIndex} className="gantt-process" style={{ flexGrow: process.timeInCPU }}>
                             <div 
-                              className="h-[50px] w-full border flex items-center justify-center"
+                              className="gantt-cell"
                               style={{ background: process.color }}
                               data-tooltip-id={process.Pid}
                               data-tooltip-place="top"
                               data-tooltip-html={`
-                                <div class="flex flex-col text-black items-center justify-center gap-2">
-                                  <div class="flex flex-row w-full py-2 items-center justify-center border-b-2 border-black gap-2">
-                                    <div class="rounded-full w-5 h-5 border-black border" style="background-color:${process.color};"></div>
-                                    <span class="text-base">${process.Pid}</span>
+                                <div class='flex flex-col text-black items-center justify-center gap-2'>
+                                  <div class='flex flex-row w-full py-2 items-center justify-center border-b-2 border-black gap-2'>
+                                    <div class='rounded-full w-5 h-5 border-black border' style='background-color:${process.color};'></div>
+                                    <span class='text-base'>${process.Pid}</span>
                                   </div>
-
-                                  <div class="flex flex-col">
-                                    <span class="text-base">Arrival Time: ${process.arrivalTime}</span>
-                                    <span class="text-base">Exiting Time: ${process.exitingTime}</span>
-                                    <span class="text-base">Time In CPU: ${process.timeInCPU}</span>
+                                  <div class='flex flex-col'>
+                                    <span class='text-base'>Arrival Time: ${process.arrivalTime}</span>
+                                    <span class='text-base'>Exiting Time: ${process.exitingTime}</span>
+                                    <span class='text-base'>Time In CPU: ${process.timeInCPU}</span>
                                   </div>
                                 </div>
                               `}
@@ -963,44 +933,36 @@ const Simulator = () => {
                             >
                               {process.Pid}
                             </div>
-                            <span className="ml-[-8px]"> {process.arrivalTime} </span>
+                            <span className="gantt-time"> {process.arrivalTime} </span>
                             <Tooltip id={process.Pid} />
                           </div>
                         )
                       })}
-
-                      {/* for Last Process in a line */}
-                      <span className="mt-[50px] ml-[-8px]"> {row[row.length-1]?.exitingTime} </span>
+                      <span className="gantt-end-time"> {row[row.length-1]?.exitingTime} </span>
                     </div>
                   )
               })}
             </div>
           </Element>
-
-          {/* Pie Charts */}
           {(currentStepIndex >= steps.length-2*noOfProcesses-3) &&
-          <div className="flex flex-col h-fit justify-center">
-            <Element name="pieCharts" className="text-2xl border-b-2 uppercase py-2 px-4 mx-auto"> Pie Charts </Element>
-            
-            <div className="flex flex-row justify-evenly mt-8">
-              {/* TAT PieChart */}
-              {Boolean(avgTAT) && <div className="w-[500px] h-[450px] text-2xl border">
-                <h2 className="text-2xl border-b-2 py-2 px-5 mx-auto w-fit"> Turnaround Time (TAT) </h2>  
+          <div className="pie-charts-section">
+            <Element name="pieCharts" className="pie-charts-title"> Pie Charts </Element>
+            <div className="pie-charts-container">
+              {Boolean(avgTAT) && <div className="pie-chart">
+                <h2 className="pie-chart-title"> Turnaround Time (TAT) </h2>  
                 <InView threshold={0}>
                   {({ inView, ref }) => (
-                    <div ref={ref} className={`transition-opacity ${inView? 'opacity-100': 'opacity-0'}`}>
+                    <div ref={ref} className={`pie-chart-content${inView? ' visible': ' hidden'}`}>
                       {inView && <PieChart data={steps[steps.length - 1].data} y='TAT' />}
                     </div>
                   )}
                 </InView>
               </div>}
-
-              {/* WT PieChart */}
-              {Boolean(avgWT) && <div className="w-[500px] h-[450px] text-2xl border">
-                <h2 className="text-2xl border-b-2 py-2 px-5 mx-auto w-fit"> Waiting Time (WT) </h2>
+              {Boolean(avgWT) && <div className="pie-chart">
+                <h2 className="pie-chart-title"> Waiting Time (WT) </h2>
                 <InView threshold={0}>
                   {({ inView, ref }) => (
-                    <div ref={ref} className={`transition-opacity ${inView? 'opacity-100': 'opacity-0'}`}>
+                    <div ref={ref} className={`pie-chart-content${inView? ' visible': ' hidden'}`}>
                       {inView && <PieChart data={steps[steps.length - 1].data} y='WT' />}
                     </div>
                   )}

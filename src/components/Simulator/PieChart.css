@@ -1,0 +1,128 @@
+/* Pie Chart Container Styles - Fixed to match existing design system */
+.pie-chart-container {
+  /* Use CSS variables from the existing design system */
+  --chart-text-color: var(--text-primary);
+  --chart-secondary-text: var(--text-secondary);
+  --chart-font-size: 1rem;
+  --chart-title-size: 1.125rem;
+  --chart-background: var(--bg-secondary);
+  --chart-border: var(--border-primary);
+  
+  /* Apply consistent styling matching the existing pie-chart class */
+  width: 550px;
+  height: 500px;
+  font-size: var(--chart-font-size);
+  line-height: 1.75rem;
+  border: 2px solid var(--chart-border);
+  background: var(--chart-background);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.pie-chart-container:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Chart-specific element styling */
+.pie-chart-container .ej2-chart-legend-text,
+.pie-chart-container .chart-legend-text {
+  fill: var(--chart-text-color) !important;
+  font-size: var(--chart-font-size) !important;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.pie-chart-container .ej2-chart-data-label,
+.pie-chart-container .chart-data-label {
+  fill: var(--chart-text-color) !important;
+  font-size: var(--chart-font-size) !important;
+  font-weight: 600 !important;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.pie-chart-container .ej2-chart-tooltip,
+.pie-chart-container .chart-tooltip {
+  font-size: var(--chart-font-size) !important;
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-primary) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--chart-text-color) !important;
+  box-shadow: var(--shadow-lg) !important;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Title styling for chart containers */
+.pie-chart-container .ej2-chart-title,
+.pie-chart-container .chart-title {
+  fill: var(--chart-text-color) !important;
+  font-size: var(--chart-title-size) !important;
+  font-weight: 700 !important;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Subtitle styling */
+.pie-chart-container .ej2-chart-sub-title,
+.pie-chart-container .chart-subtitle {
+  fill: var(--chart-secondary-text) !important;
+  font-size: calc(var(--chart-font-size) * 0.875) !important;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Responsive adjustments matching the existing breakpoints */
+@media (max-width: 1200px) {
+  .pie-chart-container {
+    width: 450px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pie-chart-container {
+    width: 100%;
+    max-width: 400px;
+    height: 350px;
+    --chart-font-size: 0.875rem;
+    --chart-title-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pie-chart-container {
+    height: 300px;
+    --chart-font-size: 0.75rem;
+    --chart-title-size: 0.875rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .pie-chart-container {
+    --chart-text-color: #ffffff;
+    --chart-secondary-text: #cccccc;
+    --chart-background: #1a1a1a;
+    --chart-border: #ffffff;
+  }
+}
+
+/* Print styles */
+@media print {
+  .pie-chart-container {
+    --chart-text-color: #000000;
+    --chart-secondary-text: #333333;
+    --chart-background: #ffffff;
+    --chart-border: #000000;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  
+  .pie-chart-container .ej2-chart-legend-text,
+  .pie-chart-container .chart-legend-text,
+  .pie-chart-container .ej2-chart-data-label,
+  .pie-chart-container .chart-data-label {
+    fill: #000000 !important;
+  }
+}

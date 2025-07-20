@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './Cell.css';
 
 const Cell = ({ 
   rowIndex, 
@@ -8,7 +9,7 @@ const Cell = ({
   animateOpacity = false, 
   isRunning = false, 
   isDisabled = false,
-  value // Added from Table component
+  value
 }) => {
   const [cellValue, setCellValue] = useState(value);
 
@@ -43,13 +44,11 @@ const Cell = ({
 
   return (
     <td 
-      className={`py-3 transition-all duration-500 ease-in-out ${
-        animateOpacity ? 'opacity-50' : 'opacity-100'
-      }`}
+      className={`table-cell ${animateOpacity ? 'low-opacity' : 'full-opacity'}`}
       style={{ 
         backgroundColor: getBackgroundColor(),
         border: getBorderStyle(),
-        borderColor: '#e5e7eb' // Default tailwind gray-200
+        borderColor: '#e5e7eb'
       }}
     >
       <input
@@ -57,9 +56,7 @@ const Cell = ({
         value={cellValue ?? ''}
         onChange={handleChangeValue}
         placeholder={isRunning ? "-" : "0"}
-        className={`bg-transparent w-full text-center focus:outline-none ${
-          isRunning || isDisabled ? 'cursor-not-allowed' : 'cursor-text'
-        }`}
+        className={`cell-input ${isRunning || isDisabled ? 'disabled' : 'enabled'}`}
         disabled={isRunning || isDisabled}
         aria-label={`Cell ${rowIndex}-${cellID}`}
       />

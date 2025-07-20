@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <!-- Enhanced gradients -->
+    <radialGradient id="bgGradient" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" style="stop-color:#6366F1;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#EC4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E1B4B;stop-opacity:1" />
+    </radialGradient>
+    
+    <linearGradient id="chipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#374151;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1F2937;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#111827;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="activeCore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="idleCore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#64748B;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#475569;stop-opacity:0.4" />
+    </linearGradient>
+    
+    <linearGradient id="schedulerCore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#EAB308;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Enhanced filters -->
+    <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feOffset dx="0" dy="1" result="offset"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offset" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="pulseGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Animation for active core -->
+    <animate id="pulse" attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </defs>
+  
+  <!-- Background with depth -->
+  <circle cx="16" cy="16" r="15.5" fill="url(#bgGradient)" stroke="#0F172A" stroke-width="1"/>
+  
+  <!-- CPU chip base with shadow -->
+  <rect x="7" y="7" width="18" height="18" rx="1.5" ry="1.5" 
+        fill="url(#chipGradient)" 
+        stroke="#4B5563" 
+        stroke-width="0.8" 
+        filter="url(#chipShadow)"/>
+  
+  <!-- Chip surface details -->
+  <rect x="8" y="8" width="16" height="16" rx="1" ry="1" 
+        fill="none" 
+        stroke="#6B7280" 
+        stroke-width="0.3" 
+        opacity="0.6"/>
+  
+  <!-- Enhanced CPU pins with better positioning -->
+  <!-- Left pins -->
+  <g opacity="0.9">
+    <rect x="3.5" y="9.5" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="3.5" y="11.8" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="3.5" y="14.1" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="3.5" y="16.4" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="3.5" y="18.7" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="3.5" y="21" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+  </g>
+  
+  <!-- Right pins -->
+  <g opacity="0.9">
+    <rect x="25" y="9.5" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="25" y="11.8" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="25" y="14.1" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="25" y="16.4" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="25" y="18.7" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+    <rect x="25" y="21" width="3.5" height="0.8" rx="0.4" fill="#E5E7EB"/>
+  </g>
+  
+  <!-- Top pins -->
+  <g opacity="0.9">
+    <rect x="9.5" y="3.5" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="11.8" y="3.5" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="14.1" y="3.5" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="16.4" y="3.5" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="18.7" y="3.5" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="21" y="3.5" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+  </g>
+  
+  <!-- Bottom pins -->
+  <g opacity="0.9">
+    <rect x="9.5" y="25" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="11.8" y="25" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="14.1" y="25" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="16.4" y="25" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="18.7" y="25" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+    <rect x="21" y="25" width="0.8" height="3.5" rx="0.4" fill="#E5E7EB"/>
+  </g>
+  
+  <!-- CPU Cores with enhanced design -->
+  <!-- Active core (top-left) -->
+  <g>
+    <rect x="9.5" y="9.5" width="4.5" height="4.5" rx="0.8" 
+          fill="url(#activeCore)" 
+          filter="url(#coreGlow)" 
+          opacity="1">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="11.75" cy="11.75" r="0.6" fill="#FFFFFF" opacity="0.9"/>
+    <text x="11.75" y="12.5" text-anchor="middle" font-family="monospace" font-size="3" fill="#1F2937" font-weight="bold">1</text>
+  </g>
+  
+  <!-- Scheduler core (top-right) -->
+  <g>
+    <rect x="18" y="9.5" width="4.5" height="4.5" rx="0.8" 
+          fill="url(#schedulerCore)" 
+          filter="url(#pulseGlow)" 
+          opacity="0.9">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="20.25" cy="11.75" r="0.6" fill="#FFFFFF" opacity="0.9"/>
+    <text x="20.25" y="12.5" text-anchor="middle" font-family="monospace" font-size="3" fill="#1F2937" font-weight="bold">S</text>
+  </g>
+  
+  <!-- Semi-active core (bottom-left) -->
+  <g>
+    <rect x="9.5" y="18" width="4.5" height="4.5" rx="0.8" 
+          fill="url(#activeCore)" 
+          filter="url(#coreGlow)" 
+          opacity="0.7">
+      <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="11.75" cy="20.25" r="0.6" fill="#FFFFFF" opacity="0.8"/>
+    <text x="11.75" y="21" text-anchor="middle" font-family="monospace" font-size="3" fill="#1F2937" font-weight="bold">2</text>
+  </g>
+  
+  <!-- Idle core (bottom-right) -->
+  <g>
+    <rect x="18" y="18" width="4.5" height="4.5" rx="0.8" 
+          fill="url(#idleCore)" 
+          opacity="0.5"/>
+    <circle cx="20.25" cy="20.25" r="0.6" fill="#94A3B8" opacity="0.6"/>
+    <text x="20.25" y="21" text-anchor="middle" font-family="monospace" font-size="3" fill="#475569" font-weight="bold">-</text>
+  </g>
+  
+  <!-- Central connection hub -->
+  <circle cx="16" cy="16" r="2" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.7">
+    <animate attributeName="stroke-opacity" values="0.4;0.9;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Data flow indicators (small animated dots) -->
+  <g opacity="0.8">
+    <!-- Flow from scheduler to cores -->
+    <circle cx="17" cy="13" r="0.4" fill="#10B981">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; -5,-2; -5,-2; 0,0" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="15" cy="19" r="0.4" fill="#3B82F6">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0; -3,1; -3,1; 0,0" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Corner accent dots for tech aesthetic -->
+  <circle cx="10" cy="10" r="0.3" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="22" cy="10" r="0.3" fill="#EF4444" opacity="0.6"/>
+  <circle cx="10" cy="22" r="0.3" fill="#06B6D4" opacity="0.6"/>
+  <circle cx="22" cy="22" r="0.3" fill="#8B5CF6" opacity="0.6"/>
+</svg>

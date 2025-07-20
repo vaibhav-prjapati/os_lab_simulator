@@ -8,6 +8,7 @@ import Cell from './Cell.jsx';
 import { ShinyButton } from '..';
 import { ImCross } from "react-icons/im";
 import { motion, AnimatePresence } from 'framer-motion';
+import './Table.css';
 
 const Table = ({ 
   data, 
@@ -44,16 +45,16 @@ const Table = ({
   };
 
   return (
-    <div className="flex flex-row mx-auto h-fit gap-4">
+    <div className="table-container">
       {/* Table */}
-      <table className='w-[800px] border-collapse'>
+      <table className='table-main'>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
                 <th 
                   key={header.id}
-                  className={`border py-3 ${thClassName}`}
+                  className={`table-header ${thClassName}`}
                   colSpan={header.colSpan}
                 >
                   {flexRender(
@@ -98,13 +99,13 @@ const Table = ({
       
       {/* DeleteRow Buttons */}
       {!isRunning && isDeleteRowAllowed && (
-        <div className='flex flex-col mt-12'>
+        <div className='delete-buttons-container'>
           {data.map((row, index) => (
-            <div key={index} className='flex items-center justify-end h-[49px]'>
+            <div key={index} className='delete-button-wrapper'>
               <ShinyButton
                 text={<ImCross />}
                 onClick={() => handleDeleteRow(index)}
-                className={`p-2 text-xs rounded-full border border-gray-500 text-gray-500 hover:text-white hover:border-white ${crossClassName}`}
+                className={`delete-button ${crossClassName}`}
               />
             </div>
           ))}

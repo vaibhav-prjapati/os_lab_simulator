@@ -1,0 +1,420 @@
+/* Import JSON Dialog - Fixed to match CPU Scheduler theme */
+
+.import-json-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1001;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.import-json-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.import-json-container.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.import-json-content {
+  /* Prevents click propagation */
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.import-json-box {
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--radius-xl);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding: 2rem;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  color: var(--text-primary);
+  border: 2px solid var(--border-primary);
+  box-shadow: var(--shadow-xl);
+  pointer-events: all;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.import-json-container.hidden .import-json-box {
+  transform: scale(0.95) translateY(20px);
+}
+
+.import-json-container.visible .import-json-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Import JSON title */
+.import-json-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  border-bottom: 2px solid var(--accent-primary);
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* JSON textarea styling */
+.json-textarea {
+  text-align: left;
+  width: 100%;
+  color: var(--text-primary);
+  min-height: 200px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background: var(--bg-primary);
+  padding: 1rem;
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  outline: none;
+  resize: vertical;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.json-textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.json-textarea:hover {
+  border-color: var(--accent-secondary);
+}
+
+.json-textarea::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Error state for textarea */
+.json-textarea.error {
+  border-color: var(--accent-danger);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+/* Success state for textarea */
+.json-textarea.success {
+  border-color: var(--accent-success);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+/* Instructions text */
+.import-instructions {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--text-muted);
+  padding: 0.75rem 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+}
+
+/* Error message */
+.import-error {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--accent-danger);
+  padding: 0.75rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--accent-danger);
+  border-radius: var(--radius-md);
+  margin-top: 0.5rem;
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: fit-content;
+  margin-left: auto;
+  align-items: center;
+}
+
+.cancel-button, .import-button {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-family: inherit;
+}
+
+.cancel-button {
+  background: transparent;
+  color: var(--accent-danger);
+  border-color: var(--accent-danger);
+}
+
+.cancel-button:hover {
+  background: var(--accent-danger);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.cancel-button:focus {
+  outline: 2px solid var(--accent-danger);
+  outline-offset: 2px;
+}
+
+.import-button {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+.import-button:hover {
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.import-button:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.import-button:disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border-color: var(--border-primary);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Loading state for import button */
+.import-button.loading {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.import-button.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: loading 1.5s infinite;
+}
+
+/* File drop zone styling (if you add drag-and-drop) */
+.json-drop-zone {
+  border: 2px dashed var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+  background: var(--bg-primary);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.json-drop-zone:hover,
+.json-drop-zone.drag-over {
+  border-color: var(--accent-primary);
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+.json-drop-zone-text {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/* Close button (top right corner) */
+.import-json-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: 2px solid var(--border-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  font-size: 1.25rem;
+}
+
+.import-json-close:hover {
+  background: var(--accent-danger);
+  border-color: var(--accent-danger);
+  color: white;
+}
+
+/* Custom scrollbar for long JSON content */
+.json-textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.json-textarea::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.json-textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-sm);
+}
+
+.json-textarea::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .import-json-box {
+    min-width: 95vw;
+    max-height: 90vh;
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .json-textarea {
+    min-height: 150px;
+    font-size: 0.875rem;
+  }
+  
+  .button-group {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  
+  .cancel-button, .import-button {
+    width: 100%;
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.625rem 1rem;
+  }
+  
+  .import-json-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .import-json-box {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .json-textarea {
+    min-height: 120px;
+    padding: 0.75rem;
+  }
+  
+  .import-instructions,
+  .import-error {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Animation for dialog entrance */
+@keyframes importDialogSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.import-json-container.visible .import-json-box {
+  animation: importDialogSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Validation indicators */
+.json-validation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.json-validation.valid {
+  color: var(--accent-success);
+}
+
+.json-validation.invalid {
+  color: var(--accent-danger);
+}
+
+.json-validation-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .import-json-container,
+  .import-json-box,
+  .json-textarea,
+  .cancel-button,
+  .import-button {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .json-textarea {
+    border-width: 3px;
+  }
+  
+  .cancel-button,
+  .import-button {
+    border-width: 3px;
+  }
+}

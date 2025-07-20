@@ -1,0 +1,389 @@
+/* Fixed save dialogue styles to match the existing design system */
+
+.save-dialogue-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+}
+
+.save-dialogue-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+.save-dialogue-container.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1);
+}
+
+.save-dialogue-content {
+  /* This prevents clicks from propagating to parent */
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.save-dialogue-content.hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.save-dialogue-content.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.save-dialogue-box {
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: 90vw;
+  border-radius: var(--radius-xl);
+  font-size: 1.25rem;
+  padding: 2.5rem;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  color: var(--text-primary);
+  border: 2px solid var(--border-primary);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.save-dialogue-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.save-dialogue-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.save-dialogue-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent-primary);
+  padding-bottom: 0.5rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.save-icon {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+  animation: pulse 2s infinite;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.input-field label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-size: 1rem;
+}
+
+.save-input {
+  min-width: 100%;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+}
+
+.save-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  background: var(--bg-secondary);
+}
+
+.save-input:hover {
+  border-color: var(--accent-secondary);
+}
+
+.save-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.save-input.textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.save-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.save-button-parent {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.save-button-child {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.875rem 2rem;
+  border: 2px solid var(--accent-primary);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.save-button-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+}
+
+.save-button-child:active {
+  transform: translateY(0);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+/* Cancel button variant */
+.cancel-button {
+  background: transparent !important;
+  border: 2px solid var(--text-muted) !important;
+  color: var(--text-muted) !important;
+}
+
+.cancel-button:hover {
+  border-color: var(--accent-danger) !important;
+  color: var(--accent-danger) !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: var(--accent-danger);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Error state */
+.save-input.error {
+  border-color: var(--accent-danger);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.error-message {
+  font-size: 0.875rem;
+  color: var(--accent-danger);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Success state */
+.save-input.success {
+  border-color: var(--accent-success);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+/* Loading state */
+.save-button-child.loading {
+  position: relative;
+  color: transparent;
+}
+
+.save-button-child.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.save-dialogue-box {
+  animation: fadeInModal 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .save-dialogue-box {
+    min-width: 90vw;
+    padding: 2rem;
+    gap: 1.25rem;
+    font-size: 1rem;
+    margin: 1rem;
+  }
+  
+  .save-dialogue-title {
+    font-size: 1.25rem;
+  }
+  
+  .input-field {
+    font-size: 1rem;
+  }
+  
+  .save-input {
+    padding: 0.75rem;
+  }
+  
+  .save-button-container {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .save-button-child {
+    width: 100%;
+    padding: 0.875rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .save-dialogue-box {
+    min-width: 95vw;
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+  
+  .save-dialogue-title {
+    font-size: 1.125rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .input-field {
+    gap: 0.5rem;
+  }
+  
+  .save-input.textarea {
+    min-height: 100px;
+  }
+}
+
+/* Dark theme enhancements */
+@media (prefers-color-scheme: dark) {
+  .save-dialogue-container {
+    background: rgba(15, 23, 42, 0.9);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .save-dialogue-box {
+    border-width: 3px;
+  }
+  
+  .save-input {
+    border-width: 2px;
+  }
+  
+  .save-button-child {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .save-dialogue-container,
+  .save-dialogue-content,
+  .save-button-child,
+  .save-input,
+  .save-icon {
+    transition: none;
+    animation: none;
+  }
+  
+  .save-dialogue-box {
+    animation: none;
+  }
+}

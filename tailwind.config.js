@@ -1,10 +1,23 @@
-module.exports = {
+export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'shine': 'shine 1s',
+        'line': 'lineGrow 1s ease-in-out',
+      },
+      keyframes: {
+        shine: {
+          '100%': { left: '125%' }
+        },
+        lineGrow: {
+          '0%': { width: '0' },
+          '100%': { width: '100%' }
+        }
+      }
+    },
   },
   plugins: [],
 }
