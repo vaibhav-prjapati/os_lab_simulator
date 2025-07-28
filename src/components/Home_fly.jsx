@@ -12,7 +12,7 @@ import "../styles/Home_fly.css";
 import Footer from "./Footer";
 
 const Home_fly = () => {
-  const [curAlgos, setCurAlgos] = useState(OSAlgorithms);
+  const [curAlgos, setCurAlgos] = useState(OSAlgorithms()); // Call the function
   const [ptext, setPtext] = useState("Operating System Algorithms");
 
   const handleCaptureText = (id) => {
@@ -23,9 +23,14 @@ const Home_fly = () => {
     }
   };
 
-  // const handleAlgoName=(algoname)=>{
-  //   setCurAlgos(algoname)
-  // }
+  const handleReadDocs = (gfgLink, algorithmName) => {
+    if (gfgLink) {
+      // Open GeeksforGeeks link in new tab
+      window.open(gfgLink, '_blank', 'noopener,noreferrer');
+    } else {
+      alert(`Documentation link not available for ${algorithmName}`);
+    }
+  };
 
   return (
     <div className="home-fly-main">
@@ -36,7 +41,7 @@ const Home_fly = () => {
             id="card-list"
             style={{ "--count": curAlgos.length }}
           >
-            {curAlgos.map(({ name, description }, index) => {
+            {curAlgos.map(({ name, description, gfgLink }, index) => {
               return (
                 <li
                   key={index}
@@ -55,7 +60,13 @@ const Home_fly = () => {
                       <span className="model-name"> {name} </span>
                       <span> {description} </span>
                       <br />
-                      <button>Read Full Docs</button>
+                      <button 
+                        onClick={() => handleReadDocs(gfgLink, name)}
+                        className="docs-button"
+                        title={`Read ${name} documentation on GeeksforGeeks`}
+                      >
+                        Read Full Docs
+                      </button>
                     </div>
                   </div>
                 </li>
@@ -73,7 +84,7 @@ const Home_fly = () => {
       </div>
 
       <div className="sidebar">
-        <h1 className="side-upper-heading">Select Your Categary</h1>
+        <h1 className="side-upper-heading">Select Your Category</h1>
         <div className="side-nav-container">
           <div className="side-nav">
             <p
@@ -81,7 +92,7 @@ const Home_fly = () => {
               id="graphAlgo"
               onClick={() => {
                 handleCaptureText(`graphAlgo`);
-                setCurAlgos(graphAlgo);
+                setCurAlgos(graphAlgo()); // Call the function
               }}
             >
               Graph Algorithms
@@ -92,7 +103,7 @@ const Home_fly = () => {
               id="sortAlgo"
               onClick={() => {
                 handleCaptureText("sortAlgo");
-                setCurAlgos(sortingALgo);
+                setCurAlgos(sortingALgo()); // Call the function
               }}
             >
               Sorting Algorithms
@@ -103,7 +114,7 @@ const Home_fly = () => {
               id="searchAlgo"
               onClick={() => {
                 handleCaptureText("searchAlgo");
-                setCurAlgos(searchingAlgo);
+                setCurAlgos(searchingAlgo()); // Call the function
               }}
             >
               Searching Algorithms
@@ -114,7 +125,7 @@ const Home_fly = () => {
               id="btAlgo"
               onClick={() => {
                 handleCaptureText("btAlgo");
-                setCurAlgos(btAlgo);
+                setCurAlgos(btAlgo()); // Call the function
               }}
             >
               Backtracking Algorithms
@@ -125,7 +136,7 @@ const Home_fly = () => {
               id="osAlgo"
               onClick={() => {
                 handleCaptureText("osAlgo");
-                setCurAlgos(OSAlgorithms);
+                setCurAlgos(OSAlgorithms()); // Call the function
               }}
             >
               Operating System Algorithms
@@ -135,10 +146,10 @@ const Home_fly = () => {
               id="AIalgo"
               onClick={() => {
                 handleCaptureText("AIalgo");
-                setCurAlgos(aiAlgo);
+                setCurAlgos(aiAlgo()); // Call the function
               }}
             >
-              Artificial Inteligence Algorithms
+              Artificial Intelligence Algorithms
             </p>
 
             <p
@@ -146,7 +157,7 @@ const Home_fly = () => {
               id="dpAlgo"
               onClick={() => {
                 handleCaptureText("dpAlgo");
-                setCurAlgos(dpAlgo);
+                setCurAlgos(dpAlgo()); // Call the function
               }}
             >
               Dynamic Programming Algorithms

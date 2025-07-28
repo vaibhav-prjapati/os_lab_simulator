@@ -9,7 +9,7 @@
 }
 :root {
 	--rotate-speed: 40;
-	--count: 8; /* Defa.ult count, the DOM element sho.uld override this */
+	--count: 8; /* Default count, the DOM element should override this */
 	--easeInOutSine: cubic-bezier(0.37, 0, 0.63, 1);
 	--easing: cubic-bezier(0.000, 0.37, 1.000, 0.63);
 }
@@ -176,9 +176,56 @@ a {
 
 .saste-desc{
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding-bottom: 30px; /* Add space for button */
 }
 
-.saste-desc button{
+/* Updated button styles that work with your design */
+.docs-button {
+	position: absolute;
+	bottom: -25px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: linear-gradient(135deg, #3B2ED0 0%, #667eea 100%);
+	border: none;
+	border-radius: 6px;
+	color: white;
+	padding: 8px 12px;
+	font-size: 11px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	box-shadow: 0 2px 6px rgba(59, 46, 208, 0.3);
+	white-space: nowrap;
+	z-index: 10;
+	min-width: 90px;
+}
+
+.docs-button:hover {
+	transform: translateX(-50%) translateY(-2px);
+	box-shadow: 0 4px 12px rgba(59, 46, 208, 0.5);
+	background: linear-gradient(135deg, #2f1fa3 0%, #5a67d8 100%);
+	scale: 1.05;
+}
+
+.docs-button:active {
+	transform: translateX(-50%) translateY(0);
+	box-shadow: 0 2px 6px rgba(59, 46, 208, 0.3);
+	scale: 0.98;
+}
+
+.docs-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(59, 46, 208, 0.4);
+}
+
+/* Remove the old button styles */
+.saste-desc button:not(.docs-button){
 	position: absolute;
 	color: blue;
 	width: 100%;
@@ -187,7 +234,7 @@ a {
 	right: -30%;
 }
 
-.saste-desc button:hover{
+.saste-desc button:not(.docs-button):hover{
 	color: red;
 }
 

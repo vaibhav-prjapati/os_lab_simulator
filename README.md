@@ -75,4 +75,4 @@ MIT
 
 ---
 
-Made with ❤️ by Vaibhav Kumar & Gaurav Prakash
+Made with ❤️ by Vaibhav Kumar , Gaurav Prakash & Prashant kumar

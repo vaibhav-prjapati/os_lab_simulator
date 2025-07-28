@@ -30,7 +30,7 @@ const TeamCard = ({ name, image, social, id }) => {
               </div>
             </div>
           </div>
-        ) : (
+        ) : id == 2 ? (
           <div className="maincontainer maincontainer-2">
             <div className="back">
               <h2>About Me & Project</h2>
@@ -48,9 +48,27 @@ const TeamCard = ({ name, image, social, id }) => {
               </div>
             </div>
           </div>
+        ) : (
+          <div className="maincontainer maincontainer-3">
+            <div className="back">
+              <h2>About Me & Project</h2>
+              <p>
+                Hello! I'm Prashant Kumar, a passionate developer and a third year BE IT student from UIET Chandigarh. 
+                I'm enthusiastic about web development and algorithms. 
+                I joined this project to contribute my skills and help make 
+                complex programming concepts easier to understand for everyone.
+              </p>
+            </div>
+            <div className="front front-3">
+              <div className="image">
+                <img src={image} alt="Prashant Kumar" />
+                <h2>{name}</h2>
+              </div>
+            </div>
+          </div>
         )}
 
-        {/* jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj */}
+        {/* Social Links Section */}
 
         {id == 1 ? (
           <div className={`container container-1`}>
@@ -89,7 +107,7 @@ const TeamCard = ({ name, image, social, id }) => {
               </div>
             </div>
           </div>
-        ) : (
+        ) : id == 2 ? (
           <div className={`container container-2`}>
             <div className="card">
               <div className="face bg-face face1">
@@ -118,6 +136,43 @@ const TeamCard = ({ name, image, social, id }) => {
                       <FaGithub />
                     </a>
                     <a href="mailto:prakashgaurav189@gmail.com" target="_blank">
+                      {" "}
+                      <MdEmail />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className={`container container-3`}>
+            <div className="card">
+              <div className="face bg-face face1">
+                <h1>Lets Get Connect </h1>
+              </div>
+              <div className="face face2">
+                <div className="c3 content">
+                  <h3>
+                    <a
+                      href="https://www.linkedin.com/in/prashant-kumar/"
+                      target="_blank"
+                    >
+                      Follow Us
+                    </a>
+                  </h3>
+
+                  <div className="social-link">
+                    <a
+                      href="https://www.linkedin.com/in/prashant-kumar/"
+                      target="_blank"
+                    >
+                      <FaLinkedin />
+                    </a>
+                    <a href="https://github.com/prashantkumar" target="_blank">
+                      {" "}
+                      <FaGithub />
+                    </a>
+                    <a href="mailto:prashant.kumar@gmail.com" target="_blank">
                       {" "}
                       <MdEmail />
                     </a>

@@ -3,6 +3,7 @@ import '../styles/About.css'
 
 import ashishImg from '../assets/teamImage/vaibhavImage.png'
 import kavyaImg from '../assets/teamImage/gauravImage.jpg'
+import prashantImg from '../assets/teamImage/prashantImage.jpg' 
 import socialImg from '../assets/teamImage/Social.png'
 //import InstructorCard from '../components/InstructorCard'
 import Footer from '../components/Footer'
@@ -22,6 +23,7 @@ const About = () => {
         <div className='team'>
           <TeamCard name="Vaibhav Kumar" id='1' image = {ashishImg} social={socialImg} />
           <TeamCard name="Gaurav Prakash" id='2' image={kavyaImg}  social={socialImg} />
+          <TeamCard name="Prashant Kumar" id='3' image={prashantImg} social={socialImg} />
         </div>
       </div>
       {/* <div className="out-instructor-container">
